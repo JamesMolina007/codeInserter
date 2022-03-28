@@ -1,18 +1,42 @@
- 
+#include "matrixPattern.hpp"
+#include "Pattern.hpp"
 #include <iostream>
 #include <string.h>
 #include <fstream>
-#include <vector>
 #include <iomanip>
+#include <cctype>
+#include <vector>
 #include <regex>
-#include "Pattern.hpp"
 
 using namespace std;
 
-vector< Pattern > matrixPatterns;
+matrixPattern *mp = new matrixPattern();
 
-void insertPair(string first, string second){
+void error(string line){
+	if(line.size() > 0){
+		cerr << "Inaceptable Input: " << line << endl;
+		exit(0);
+	}
+}
 
+void printer(){
+	cout << mp->toString() << endl;
+}
+
+string toLowerCase(string s){
+	string returnable = "";
+	for(char c : s)
+		returnable += tolower(c);
+	return returnable;
+}
+
+void clasificator(string first, string second, string line){
+	if( !isalpha(first[0]) || !isalpha(second[0]) )
+		error(line);
+	if ( toLowerCase(first) == "class")
+		mp->addElement(new Pattern(make_pair(first, second)));
+    else
+		mp->insertIntoLastPattern(make_pair(first, second));
 }
 
 void insertable(vector<string> tokens, string line){
@@ -20,10 +44,10 @@ void insertable(vector<string> tokens, string line){
 	for(string token : tokens)
 		if(!token.empty())
 			tokenPair.push_back(token);
-	if(tokenPair.size() != 2){
-		cerr << "Inaceptable Input: " << line << endl;
-		exit(0);
-	}
+	if(tokenPair.size() != 2)
+		error(line);
+	else
+		clasificator(tokenPair[0], tokenPair[1], line);
 }
 
 void tokenizer(string line){
@@ -43,5 +67,6 @@ void readFile(char *fileName){
 
 int main(int argc, char** argv) {
 	readFile(argv[1]);
+	printer();
 	return 0;
 }

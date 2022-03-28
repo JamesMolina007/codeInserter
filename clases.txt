@@ -1,4 +1,4 @@
-		class  	 perro 
+		class  	 1perro  32
  int 	var1
 	int	 var2
 	int	var3
