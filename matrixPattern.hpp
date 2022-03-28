@@ -33,6 +33,11 @@ class matrixPattern{
             matrixElements[matrixElements.size()-1]->addPair(element);
         }
 
+        void matrixToCode(){
+            
+        }
+        
+
         string toString(){
             string returnable = "";
 			for(Pattern* patterns : matrixElements)

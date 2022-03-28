@@ -23,6 +23,10 @@ void printer(){
 	cout << mp->toString() << endl;
 }
 
+void save(string path){
+	mp->matrixToCode();
+}
+
 string toLowerCase(string s){
 	string returnable = "";
 	for(char c : s)
@@ -66,7 +70,14 @@ void readFile(char *fileName){
 
 
 int main(int argc, char** argv) {
-	readFile(argv[1]);
-	printer();
+	if(argc != 3){
+		cerr << '\t' << "Error al ejecutar!" << endl;
+		cerr << '\t' << "Argumentos proporcionados de forma incorrecta" << endl;
+		cerr << '\t' << '\t' <<  "ejecutable.exe [readFile] [savePath]" << endl;
+	}else{
+		readFile(argv[1]);
+		printer();
+		save(argv[2]);
+	}
 	return 0;
 }
