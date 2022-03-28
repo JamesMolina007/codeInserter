@@ -11,26 +11,33 @@ using namespace std;
 
 vector< Pattern > matrixPatterns;
 
-void tokenizer(ifstream file){
-	
+void insertPair(string first, string second){
+
+}
+
+void insertable(vector<string> tokens, string line){
+	vector<string> tokenPair;
+	for(string token : tokens)
+		if(!token.empty())
+			tokenPair.push_back(token);
+	if(tokenPair.size() != 2){
+		cerr << "Inaceptable Input: " << line << endl;
+		exit(0);
+	}
+}
+
+void tokenizer(string line){
+	regex re("[\t ]");
+	sregex_token_iterator first{line.begin(), line.end(), re, -1}, last;
+	vector<string> tokens{first, last};
+	insertable(tokens, line);
 }
 
 void readFile(char *fileName){
 	string line;
 	ifstream file(fileName);
-	while( getline(file, line) ){
-		char *tok = strtok( const_cast<char*>(line.c_str()), " ");
-		while(tok != NULL){
-			string linea = tok;
-			regex re("[\t]");
-			sregex_token_iterator first{linea.begin(), linea.end(), re, -1}, last;//the '-1' is what makes the regex split (-1 := what was not matched)
-			vector<string> tokens{first, last};
-			for(int i = 0; i < tokens.size(); i++){
-				cout << i << ": " << tokens[i] << endl;
-			}
-			tok = strtok(NULL, " ");
-		}
-	}
+	while( getline(file, line) )
+		tokenizer(line);
 }
 
 
