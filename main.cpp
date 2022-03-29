@@ -69,7 +69,7 @@ int main(int argc, char** argv) {
 	if(argc != 3 && argc != 4){
 		cerr << '\t' << "Error al ejecutar!" << endl;
 		cerr << '\t' << "Argumentos proporcionados de forma incorrecta" << endl;
-		cerr << '\t' << '\t' <<  "ejecutable.exe [readFile] [savePath] [1 = with cpp]" << endl;
+		cerr << '\t' << '\t' <<  "coder.exe [readFile] [savePath] [1 = with cpp]" << endl;
 	}else{
 		readFile(argv[1]);
 		printer();
