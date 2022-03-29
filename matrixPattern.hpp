@@ -34,13 +34,13 @@ class matrixPattern{
             matrixElements[matrixElements.size()-1]->addPair(element);
         }
 
-        void matrixToCode(string path){
+        void matrixToCode(string path, bool withCPP){
             for(int i = 0; i < matrixElements.size(); i++){
                 vector< pair<string,string> > patterns = matrixElements[i]->getPattern();
                 Coder c(path + "\\" + patterns[0].second + ".hpp");
                 c.addPragma();
                 c.addNameSpace();
-                c.addClassName(patterns[0].second, matrixElements[i]->getPattern());
+                c.addClass(patterns[0].second, matrixElements[i]->getPattern(), withCPP);
             }
         }
         

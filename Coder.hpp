@@ -5,6 +5,7 @@
 #include "Pattern.hpp"
 #include <utility>
 #include <cctype>
+#include <iomanip>
 
 #pragma once
 
@@ -39,26 +40,50 @@ class Coder{
             newClass << "using namespace std;\n\n";
         }
 
-        void addClassName(string name, vector< pair<string,string> > input){
+        void addClass(string name, vector< pair<string,string> > input, bool withCPP){
             newClass << "class " << name << "{\n";
             addPrivates(input);
-            addPublics(input);
+            addPublics(input, withCPP);
             newClass << "};"; 
         }
 
         void addPrivates(vector< pair<string,string> > input){
-            newClass << "    " << "private:\n";
+            newClass << setw(4) << "private:\n";
             for(pair<string,string> pairs : input)
-                if(pairs.first != "class") newClass << "        " << pairs.first << " " << pairs.second << ";\n";
+                if(pairs.first != "class") newClass << setw(8) << pairs.first << " " << pairs.second << ";\n";
         }
 
-        void addPublics(vector< pair<string,string> > input){
-            newClass << "    " << "public:\n";
-            newClass << "        " << input[0].second << "();\n";
+        void addPublics(vector< pair<string,string> > input, bool withCPP){
+            newClass << setw(4) << "public:\n";
+            newClass << setw(8) << input[0].second << "();\n";
             for(pair<string,string> pairs : input)
-                if(pairs.first != "class"){
-                    newClass << "        " << pairs.first << " get" << (char)toupper(pairs.second[0]) << pairs.second.substr(1, pairs.second.size()-1) << "();\n";
-                    newClass << "        " << "void set" << (char)toupper(pairs.second[0]) << pairs.second.substr(1, pairs.second.size()-1) << "(" << pairs.first <<");\n";
-                } 
+                if(pairs.first != "class")
+                    addMethods(pairs.first, pairs.second, withCPP);
+            cout << "\nHeaders are created\n";
+        }
+
+        void addMethods(string first, string second, bool withCPP){
+            addSet(first, second, withCPP);
+            addGet(first, second, withCPP);
+        }
+
+        void addSet(string first, string second, bool withCPP){
+            newClass << setw(8) << "void set" << (char)toupper(second[0]) << second.substr(1, second.size()-1) << "(" << first << " " << second << ")";
+            if(withCPP)
+                newClass << ";\n";
+            else
+                newClass << "{\n" << setw(12) << "this->" << second << " = " << second << ";\n" << setw(4) << "}\n";
+        }
+
+        void addGet(string first, string second, bool withCPP){
+            newClass << setw(8) << first << " get" << (char)toupper(second[0]) << second.substr(1, second.size()-1) << "()";
+            if(withCPP)
+                newClass << ";\n";
+            else
+                newClass << "{\n" << setw(12) << "return " << second << ";\n" << setw(8) << "}\n";
+        }
+
+        void createCPPS(string className){
+            cout << "\nCPPs are created\n";
         }
 };

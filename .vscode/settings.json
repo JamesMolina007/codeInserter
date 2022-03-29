@@ -5,6 +5,7 @@
         "iostream": "cpp",
         "xstring": "cpp",
         "utility": "cpp",
-        "cctype": "cpp"
+        "cctype": "cpp",
+        "string": "cpp"
     }
 }

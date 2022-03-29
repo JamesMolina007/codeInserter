@@ -1,9 +1,11 @@
 #include "matrixPattern.hpp"
 #include "Pattern.hpp"
 #include <iostream>
+#include <stdlib.h>
 #include <string.h>
 #include <fstream>
 #include <iomanip>
+#include <ctype.h>
 #include <cctype>
 #include <vector>
 #include <regex>
@@ -23,8 +25,11 @@ void printer(){
 	cout << mp->toString() << endl;
 }
 
-void save(string path){
-	mp->matrixToCode(path);
+void save(string path, int withCPP){
+	if(withCPP == 1)
+		mp->matrixToCode(path, true);
+	else
+		mp->matrixToCode(path, false);
 }
 
 string toLowerCase(string s){
@@ -70,14 +75,14 @@ void readFile(char *fileName){
 
 
 int main(int argc, char** argv) {
-	if(argc != 3){
+	if(argc != 3 && argc != 4){
 		cerr << '\t' << "Error al ejecutar!" << endl;
 		cerr << '\t' << "Argumentos proporcionados de forma incorrecta" << endl;
-		cerr << '\t' << '\t' <<  "ejecutable.exe [readFile] [savePath]" << endl;
+		cerr << '\t' << '\t' <<  "ejecutable.exe [readFile] [savePath] [1 = with cpp]" << endl;
 	}else{
 		readFile(argv[1]);
 		printer();
-		save(argv[2]);
+		argc == 4 ? save(argv[2], strtol(argv[3], NULL, 10)) : save(argv[2], 0);
 	}
 	return 0;
 }
