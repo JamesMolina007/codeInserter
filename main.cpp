@@ -24,7 +24,7 @@ void printer(){
 }
 
 void save(string path){
-	mp->matrixToCode();
+	mp->matrixToCode(path);
 }
 
 string toLowerCase(string s){

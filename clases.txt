@@ -4,3 +4,11 @@
 	int	var3
 
 
+class pepe
+string var2
+string var4
+
+class 	conejo
+int var3
+	int	var5
+	int 		var6

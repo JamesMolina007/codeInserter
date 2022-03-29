@@ -1,4 +1,5 @@
 #include "Pattern.hpp"
+#include "Coder.hpp"
 #include <utility>
 #include <vector>
 
@@ -33,8 +34,14 @@ class matrixPattern{
             matrixElements[matrixElements.size()-1]->addPair(element);
         }
 
-        void matrixToCode(){
-            
+        void matrixToCode(string path){
+            for(int i = 0; i < matrixElements.size(); i++){
+                vector< pair<string,string> > patterns = matrixElements[i]->getPattern();
+                Coder c(path + "\\" + patterns[0].second + ".hpp");
+                c.addPragma();
+                c.addNameSpace();
+                c.addClassName(patterns[0].second, matrixElements[i]->getPattern());
+            }
         }
         
 
