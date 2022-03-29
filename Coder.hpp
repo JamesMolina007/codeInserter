@@ -1,11 +1,6 @@
-#include <string>
 #include <fstream>
 #include <iostream>
-#include <vector>
 #include "Pattern.hpp"
-#include <utility>
-#include <cctype>
-#include <iomanip>
 
 #pragma once
 

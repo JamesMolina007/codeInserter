@@ -1,7 +1,4 @@
-#include "Pattern.hpp"
 #include "Coder.hpp"
-#include <utility>
-#include <vector>
 
 #pragma once
 
@@ -45,7 +42,6 @@ class matrixPattern{
                     c.createCPPS(patterns[0].second, matrixElements[i]->getPattern());
             }
         }
-        
 
         string toString(){
             string returnable = "";

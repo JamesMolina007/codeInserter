@@ -1,14 +1,5 @@
-#include "matrixPattern.hpp"
-#include "Pattern.hpp"
-#include <iostream>
-#include <stdlib.h>
-#include <string.h>
-#include <fstream>
-#include <iomanip>
-#include <ctype.h>
-#include <cctype>
-#include <vector>
 #include <regex>
+#include "matrixPattern.hpp"
 
 using namespace std;
 
