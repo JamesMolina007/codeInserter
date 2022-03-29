@@ -37,10 +37,12 @@ class matrixPattern{
         void matrixToCode(string path, bool withCPP){
             for(int i = 0; i < matrixElements.size(); i++){
                 vector< pair<string,string> > patterns = matrixElements[i]->getPattern();
-                Coder c(path + "\\" + patterns[0].second + ".hpp");
+                Coder c(path + "\\" + patterns[0].second, withCPP);
                 c.addPragma();
                 c.addNameSpace();
-                c.addClass(patterns[0].second, matrixElements[i]->getPattern(), withCPP);
+                c.addClass(patterns[0].second, matrixElements[i]->getPattern());
+                if(withCPP)
+                    c.createCPPS(patterns[0].second, matrixElements[i]->getPattern());
             }
         }
         

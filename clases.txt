@@ -1,14 +1,16 @@
-		class  	 perro
- int 	var1
-	int	 var2
-	int	var3
+class Persona
+	int edad
+ string nombre
+	string	 apellido
+ 		int 	telefono
+
+class Tienda
+	Vector<Persona> personas
+	 int numero
+		 string direccion
 
 
-class pepe
-string var2
-string var4
-
-class 	conejo
-int var3
-	int	var5
-	int 		var6
+class animal
+string familia
+string genero
+int edad
